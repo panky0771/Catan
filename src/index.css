@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    @apply bg-catan-bg text-white;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-catan-bg;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-catan-border rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-500;
+  }
+}
+
+@layer components {
+  .hex-button {
+    @apply relative cursor-pointer transition-all duration-200;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+
+  .card-resource {
+    @apply rounded-xl border p-3 flex flex-col items-center gap-1 cursor-default select-none;
+    @apply transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 rounded-xl bg-yellow-600 hover:bg-yellow-500 font-semibold text-gray-900
+           transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 rounded-xl border border-catan-border text-gray-300 hover:bg-catan-panel
+           transition-all duration-200 disabled:opacity-50;
+  }
+
+  .panel {
+    @apply bg-catan-panel border border-catan-border rounded-xl;
+  }
+}
+
+/* Phaser canvas */
+canvas {
+  display: block;
+  outline: none;
+}
+
+/* Resource card animations */
+@keyframes resourceFloat {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-50px); opacity: 0; }
+}
+
+.resource-float {
+  animation: resourceFloat 1.5s ease-out forwards;
+}
+
+/* Dice animation */
+@keyframes diceSpin {
+  0% { transform: rotateX(0deg) rotateY(0deg); }
+  100% { transform: rotateX(720deg) rotateY(360deg); }
+}
+
+/* Hex shimmer for valid positions */
+@keyframes hexPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+.hex-valid {
+  animation: hexPulse 1s ease-in-out infinite;
+}
